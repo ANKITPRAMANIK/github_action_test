@@ -15,7 +15,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.CIVO_HOST }}
-          username: ${{ secrets.CIVO_USER }}
+          username: root
           key: ${{ secrets.CIVO_SSH_KEY }}
           port: ${{ secrets.CIVO_SSH_PORT }}
           script: |
