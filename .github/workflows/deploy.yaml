@@ -1,0 +1,26 @@
+name: Deployment of Node js Application to Civo vps
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use ssh
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.CIVO_HOST }}
+          username: ${{ secrets.CIVO_USER }}
+          key: ${{ secrets.CIVO_SSH_KEY }}
+          port: ${{ secrets.CIVO_SSH_PORT }}
+          script: |
+            cd /root/nodejs-application-deploy-github-actions
+            git pull 
+            docker compose up -d --build
+
+ 
