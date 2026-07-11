@@ -11,26 +11,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use ssh
+      steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy Via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: root
           key: ${{ secrets.SSH_KEY }}
           script: |
-            set -e
-            REPO_DIR=/root/nodejs-application-deploy-github-actions
-            if [ ! -d "$REPO_DIR/.git" ]; then
-              rm -rf "$REPO_DIR"
-              git clone https://github.com/ANKITPRAMANIK/github_action_test.git "$REPO_DIR"
-            fi
-            cd "$REPO_DIR"
+            cd /root/nodejs-application-deploy-github-actions
             git pull
-            if ! command -v docker >/dev/null 2>&1; then
-              apt-get update
-              apt-get install -y docker.io docker-compose-plugin
-              systemctl enable --now docker
-            fi
             docker compose up -d --build
 
  
