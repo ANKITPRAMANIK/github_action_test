@@ -1,16 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 
 dotenv.config();
-const port= process.env.PORT || 3000;
+const port = Number(process.env.PORT || 3000);
+const host = process.env.HOST || "0.0.0.0";
 
-const app= express()
+const app = express();
+app.use(cors());
 
 app.get("/", (req, res) => {
-    res.status(200).send("server is running successfully..."); 
+    res.status(200).send("server is running successfully...");
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+app.listen(port, host, () => {
+    console.log(`Server is running on http://${host}:${port}`);
 });
