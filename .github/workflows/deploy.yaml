@@ -10,11 +10,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
+        
       - name: Deploy Via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
