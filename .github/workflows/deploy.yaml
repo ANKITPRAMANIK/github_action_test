@@ -14,10 +14,9 @@ jobs:
       - name: Use ssh
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.CIVO_HOST }}
+          host: ${{ secrets.SSH_HOST }}
           username: root
-          key: ${{ secrets.CIVO_SSH_KEY }}
-          port: ${{ secrets.CIVO_SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             cd /root/nodejs-application-deploy-github-actions
             git pull 
